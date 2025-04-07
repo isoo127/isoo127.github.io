@@ -14,9 +14,9 @@ timezone:
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: isoo127 # the main title
+title: DevLog # the main title
 
-tagline: DevLog by isoo127 # it will display as the subtitle
+tagline: Authored by isoo127 # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
 

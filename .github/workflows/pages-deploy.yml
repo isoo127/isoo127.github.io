@@ -13,10 +13,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up WireGuard
-        uses: egor-tensin/setup-wireguard@v1
-        with:
-          config: ${{ secrets.WIREGUARD_CONFIG }}
+      - name: Create WireGuard Config
+        run: |
+          echo "${{ secrets.WIREGUARD_CONFIG }}" > wg0.conf
+
+      - name: Install WireGuard
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wireguard openresolv
+
+      - name: Start WireGuard
+        run: |
+          sudo cp wg0.conf /etc/wireguard/wg0.conf
+          sudo chmod 600 /etc/wireguard/wg0.conf
+          sudo wg-quick up wg0
+
+      - name: Check VPN connection
+        run: |
+          sudo wg show
+          # 내부 IP로 핑 테스트 (실제 서버 IP로 변경 필요)
+          # ping -c 3 192.168.x.x
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
